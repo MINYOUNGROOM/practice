@@ -35,10 +35,10 @@ public class Main {
             finalFee = basic - specialDiscount;
         } else if (entryTime > 17 ) { // 17시 이후에 입장하면 4000원 할인
             finalFee = basic - specialDiscount;
-        } else if (isPatriot == "y" &&  hasWelfareCard == "y") {
+        } else if (isPatriot == "y" &&  hasWelfareCard == "y") { // 국가유공자 y , 복지카드 y 일 경우 8000원 할인
             finalFee = basic - basicDiscount;
         } else {
-            finalFee = basic;
+            finalFee = basic; // 기본 요금
         }
         System.out.println("입장료: " + finalFee);
     }
