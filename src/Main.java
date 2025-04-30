@@ -1,48 +1,63 @@
+import java.util.Random;
 import java.util.Scanner;
 
 /*
- * 김민영 Java 미니과제 3
+ * 김민영 Java 미니과제 4
  *
- * 놀이동산 입장권 계산 프로그램
+ * 주민등록번호 생성 프로그램
  */
 public class Main {
     public static void main(String[] args) {
-        int age;
-        int entryTime;
-        char isPatriot;
-        char hasWelfareCard;
-        int basic = 10000;
-        int specialDiscount = 4000;
-        int basicDiscount = 8000;
-        int finalFee;
+        int year;
+        int mm;
+        int dd;
+        char sex;
+        String resultFirst;
+        int resultRandom;
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("[입장권 계산]");
-        System.out.print("나이를 입력해 주세요.(숫자):");
-        age = scanner.nextInt();
-        System.out.print("입장시간을 입력해 주세요.(숫자입력):");
-        entryTime = scanner.nextInt();
-        System.out.print("국가유공자 여부를 입력해 주세요.(y/n):");
-        isPatriot = scanner.next().charAt(0);
-        System.out.print("복지카드 여부를 입력해 주세요.(y/n):");
-        hasWelfareCard = scanner.next().charAt(0);
+        System.out.println("[주민등록번호 계산]");
+        System.out.print("출생년도를 입력해 주세요.(yyyy):");
+        year = scanner.nextInt();
+        System.out.print("출생월을 입력해 주세요.(mm):");
+        mm = scanner.nextInt();
+        System.out.print("출생일을 입력해 주세요.(dd):");
+        dd = scanner.nextInt();
+        System.out.print("성별을 입력해 주세요.(m/f):");
+        sex = scanner.next().charAt(0);
 
-        // TODO : 중복할인 되지 않으며, 중복될 경우 가장 할인을 많이 받은 금액 구현 필요
-        if (age < 3) { // 3세 미만 무료 입장
-            finalFee = 0;
-        } else {
-            int discount= 0;
+        int genderCode = 0;
 
-            if (age < 13 || entryTime > 17) { // 13세 미만 특별 할인 적용,  17시 이후에 입장하면 특별할인적용
-                discount =  specialDiscount; // 4000원 할인
-            } else if (isPatriot == 'y' || hasWelfareCard == 'y') { // 국가유공자 y , 복지카드 y 일 경우 일반할인 적용 8000원 할인
-                discount =  Math.max(discount , basicDiscount);
-            }
-
-            finalFee = basic - discount; // 기본 요금
+        // 성별 코드 조건문
+        switch (sex) {
+            case ('f'):
+                if (year >= 2000)
+                    genderCode = 4;
+                else {
+                    genderCode = 2;
+                }
+                break;
+            case ('m'):
+                if (year >= 2000)
+                    genderCode = 3;
+                else {
+                    genderCode = 1;
+                }
+                break;
+            default:
+                break;
         }
-        System.out.println("입장료: " + finalFee);
+
+        // 생년월일 조합
+        resultFirst = String.format("%04d%02d%02d", year, mm, dd);
+
+        // 뒤 임의번호 생성
+        Random random = new Random();
+        resultRandom = random.nextInt(1000000);  // 2.3279967568276427 (0 ~ 9 사이의 값)
+        resultRandom = Integer.parseInt(String.format("%d%06d", genderCode, resultRandom));
+
+        System.out.println(resultFirst + "-" + resultRandom);
     }
 }
 
