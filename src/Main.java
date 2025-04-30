@@ -1,6 +1,6 @@
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Random;
+import java.util.List;
 import java.util.Scanner;
 
 /*
@@ -10,41 +10,34 @@ import java.util.Scanner;
  */
 public class Main {
     public static void main(String[] args) {
-        int year;
-        int mm;
+        int voteNum; // 투표수
+        int votePeopleCnt; // 후보자 수
+        List<String> peoples = new ArrayList<String>(); // 후보자 리스트
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("[달력 출력 프로그램]");
-        System.out.print("달력의 년도를 입력해 주세요.(yyyy):");
-        year = scanner.nextInt();
-        System.out.print("달력의 월을 입력해 주세요.(mm):");
-        mm = scanner.nextInt();
+        System.out.print("총 진행할 투표수를 입력해 주세요.");
+        voteNum = scanner.nextInt();
+        System.out.print("가상 선거를 진행할 후보자 인원을 입력해 주세요.");
+        votePeopleCnt = scanner.nextInt();
+        System.out.print("1번째 후보자이름을 입력해 주세요.");
+        peoples.add(scanner.nextLine());
+        System.out.print("2번째 후보자이름을 입력해 주세요.");
+        peoples.add(scanner.nextLine());
+        System.out.print("3번째 후보자이름을 입력해 주세요.");
+        peoples.add(scanner.nextLine());
+        System.out.print("4번째 후보자이름을 입력해 주세요.");
+        peoples.add(scanner.nextLine());
 
-        Calendar cal = Calendar.getInstance();
-        cal.set(year, mm, 1);
+        // 각 투표자에게 기호 부여
+        System.out.println("[투표진행률]:");
+        for (int i = 0; i < peoples.size()+1; i++) {
 
-        int firstDay = cal.get(Calendar.DAY_OF_WEEK); // 1- 일요일
-        int endDay = cal.getActualMaximum(Calendar.DATE);
 
-        // 달력 출력 포맷
-        System.out.printf("[%04d년 %02d월]%n", year, mm);
-        System.out.printf("%2s%2s%2s%2s%2s%2s%2s", "일", "월", "화", "수", "목", "금", "토" );
-        System.out.println();
-
-        // 첫 번째 날짜를 맞추기 위해 공백을 출력
-        for (int i = 1; i < firstDay; i++) {
-            System.out.print("   ");
+            System.out.println("[기호:" + i + "]" + peoples.get(i));
         }
 
-        // 날짜 for문 돌려서
-        for (int day = 1; day <= endDay ; day++) {
-            System.out.printf("%2d ", day);
 
-            if(((firstDay + day - 1) % 7) == 0){ // 한 주 지나갈 때 마다 줄 바꿈
-                System.out.println();
-            }
-        }
         scanner.close();
     }
 }
