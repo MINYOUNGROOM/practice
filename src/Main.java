@@ -12,7 +12,6 @@ public class Main {
     public static void main(String[] args) {
         int year;
         int mm;
-        int days = 0;
 
         Scanner scanner = new Scanner(System.in);
 
