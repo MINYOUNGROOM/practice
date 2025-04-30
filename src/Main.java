@@ -1,63 +1,52 @@
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.Random;
 import java.util.Scanner;
 
 /*
- * 김민영 Java 미니과제 4
+ * 김민영 Java 미니과제 5
  *
- * 주민등록번호 생성 프로그램
+ * 달력 출력 프로그램
  */
 public class Main {
     public static void main(String[] args) {
         int year;
         int mm;
-        int dd;
-        char sex;
-        String resultFirst;
-        int resultRandom;
+        int days = 0;
 
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("[주민등록번호 계산]");
-        System.out.print("출생년도를 입력해 주세요.(yyyy):");
+        System.out.println("[달력 출력 프로그램]");
+        System.out.print("달력의 년도를 입력해 주세요.(yyyy):");
         year = scanner.nextInt();
-        System.out.print("출생월을 입력해 주세요.(mm):");
+        System.out.print("달력의 월을 입력해 주세요.(mm):");
         mm = scanner.nextInt();
-        System.out.print("출생일을 입력해 주세요.(dd):");
-        dd = scanner.nextInt();
-        System.out.print("성별을 입력해 주세요.(m/f):");
-        sex = scanner.next().charAt(0);
 
-        int genderCode = 0;
+        Calendar cal = Calendar.getInstance();
+        cal.set(year, mm, 1);
 
-        // 성별 코드 조건문
-        switch (sex) {
-            case ('f'):
-                if (year >= 2000)
-                    genderCode = 4;
-                else {
-                    genderCode = 2;
-                }
-                break;
-            case ('m'):
-                if (year >= 2000)
-                    genderCode = 3;
-                else {
-                    genderCode = 1;
-                }
-                break;
-            default:
-                break;
+        int firstDay = cal.get(Calendar.DAY_OF_WEEK); // 1- 일요일
+        int endDay = cal.getActualMaximum(Calendar.DATE);
+
+        // 달력 출력 포맷
+        System.out.printf("[%04d년 %02d월]%n", year, mm);
+        System.out.printf("%2s%2s%2s%2s%2s%2s%2s", "일", "월", "화", "수", "목", "금", "토" );
+        System.out.println();
+
+        // 첫 번째 날짜를 맞추기 위해 공백을 출력
+        for (int i = 1; i < firstDay; i++) {
+            System.out.print("   ");
         }
 
-        // 생년월일 조합
-        resultFirst = String.format("%04d%02d%02d", year, mm, dd);
+        // 날짜 for문 돌려서
+        for (int day = 1; day <= endDay ; day++) {
+            System.out.printf("%2d ", day);
 
-        // 뒤 임의번호 생성
-        Random random = new Random();
-        resultRandom = random.nextInt(1000000);  // 2.3279967568276427 (0 ~ 9 사이의 값)
-        resultRandom = Integer.parseInt(String.format("%d%06d", genderCode, resultRandom));
-
-        System.out.println(resultFirst + "-" + resultRandom);
+            if(((firstDay + day - 1) % 7) == 0){ // 한 주 지나갈 때 마다 줄 바꿈
+                System.out.println();
+            }
+        }
+        scanner.close();
     }
 }
 
