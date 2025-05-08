@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
 
@@ -31,7 +30,7 @@ public class Main {
 
         // 각 투표자에게 기호 부여
         System.out.println("[투표진행률]:");
-        for (int i = 0; i < peoples.size()+1; i++) {
+        for (int i = 0; i < peoples.size() + 1; i++) {
 
 
             System.out.println("[기호:" + i + "]" + peoples.get(i));
