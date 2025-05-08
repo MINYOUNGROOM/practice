@@ -35,10 +35,9 @@ public class Main {
         System.out.println("[투표진행률]:");
         for (int i = 1; i < peoples.size() + 1 ; i++) {
 
-            System.out.println("[기호:" + i + "]" + peoples.get(i) + "투표%들어갈 부분" + "(투표수: "+")");
+            System.out.println("[기호:" + i + "]" + peoples.get(i) + "투표 % 들어갈 부분" + "(투표수: "+")");
         }
 
         scanner.close();
     }
 }
-
